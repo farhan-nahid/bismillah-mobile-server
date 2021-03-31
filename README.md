@@ -16,6 +16,7 @@
 - React-hook-form
 - Axios
 - React-router-dom
+- Firebase-Authentication
 
 ### Back-end Technology:
 
@@ -23,7 +24,7 @@
 - Express JS
 - MongoDB
 
-### Tools
+### Tools:
 
 - dotenv
 - git
