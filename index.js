@@ -17,7 +17,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
   const mobileCollection = client.db("bismillahMobileZone").collection("mobile");
   
-    app.post('/adminAddMobile', (req,res)=>{
+    app.post('https://bismillah-phone-farhan.herokuapp.com/adminAddMobile', (req,res)=>{
       const newMobile = req.body;
      // console.log('Adding mobile', newMobile);
       mobileCollection.insertOne(newMobile)
@@ -27,14 +27,14 @@ client.connect(err => {
       })
     })
     
-    app.get('/mobileItems', (req, res)=>{
+    app.get('https://bismillah-phone-farhan.herokuapp.com/mobileItems', (req, res)=>{
       mobileCollection.find()
       .toArray((err, mobileItems)=>{
         res.send( mobileItems);
       })
 
     })
-       app.get('/mobile/:id', (req, res)=>{
+       app.get('https://bismillah-phone-farhan.herokuapp.com/mobile/:id', (req, res)=>{
          const mobile = req.params.id
         console.log('mobile', mobile);
         mobileCollection.find({_id:ObjectID(req.params.id)})
