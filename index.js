@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
+const { ObjectID } = require('bson');
 const app = express()
 require('dotenv').config();
 
@@ -33,14 +34,14 @@ client.connect(err => {
       })
 
     })
-      // app.get('/mobileItems/:_id:objectId', (req, res)=>{
-      //  console.log(req.params.id);
-      //  mobileCollection.find({req.params.id})
-      //    .toArray((err, mobileItems)=>{
-      //   res.send( mobileItems);
-      //   })
-
-  
+       app.get('/mobile/:id', (req, res)=>{
+         const mobile = req.params.id
+        console.log('mobile', mobile);
+        mobileCollection.find({_id:ObjectID(req.params.id)})
+          .toArray((err, mobileItems)=>{
+         res.send( mobileItems[0]);
+          })
+         })
 });
 
 
