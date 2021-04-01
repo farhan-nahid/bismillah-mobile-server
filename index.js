@@ -43,7 +43,6 @@ client.connect(err => {
     })
     
        app.get('/mobile/:id', (req, res)=>{
-         const mobile = req.params.id
         mobileCollection.find({_id:ObjectID(req.params.id)})
           .toArray((err, mobileItems)=>{
          res.send( mobileItems[0]);
@@ -56,7 +55,7 @@ client.connect(err => {
              res.send( totalOrder)
            })
          })
-         
+
          app.delete('/delete/:id', (req, res)=>{
           console.log(req.params.id);
           mobileCollection.deleteOne({_id: ObjectId(req.params.id)})
