@@ -1,10 +1,12 @@
-## Bismillah Mobile Zone
+## [Bismillah Mobile Zone](https://happy-zone-store.web.app/)
 
- -> About this site
+ -> about this site
 
 - If you want to buy mobile at first you need login
+- You can see order details in orders section
 - User and Admin can sign up and log in to this website using google facebook & email.
 - Admin can add more mobile
+- Admin can delete mobile
 
 ### Front-end Technology:
 
