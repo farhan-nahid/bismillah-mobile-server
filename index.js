@@ -20,10 +20,8 @@ client.connect(err => {
   
     app.post('/adminAddMobile', (req,res)=>{
       const newMobile = req.body;
-     // console.log('Adding mobile', newMobile);
       mobileCollection.insertOne(newMobile)
       .then(result =>{
-      //  console.log('insertedCount',result.insertedCount);
         res.send(result.insertedCount > 0)
       })
     })
@@ -34,7 +32,6 @@ client.connect(err => {
       .then(result=>{
         res.send(result.insertedCount > 0)
       })
-      //console.log(newOrder);
     })
     
     app.get('/mobileItems', (req, res)=>{
@@ -47,7 +44,6 @@ client.connect(err => {
     
        app.get('/mobile/:id', (req, res)=>{
          const mobile = req.params.id
-       // console.log('mobile', mobile);
         mobileCollection.find({_id:ObjectID(req.params.id)})
           .toArray((err, mobileItems)=>{
          res.send( mobileItems[0]);
@@ -60,6 +56,7 @@ client.connect(err => {
              res.send( totalOrder)
            })
          })
+         
          app.delete('/delete/:id', (req, res)=>{
           console.log(req.params.id);
           mobileCollection.deleteOne({_id: ObjectId(req.params.id)})
