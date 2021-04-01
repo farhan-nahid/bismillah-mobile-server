@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
-const { ObjectID } = require('bson');
+const { ObjectID, ObjectId } = require('bson');
 const app = express()
 require('dotenv').config();
 
@@ -16,38 +16,65 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const mobileCollection = client.db("bismillahMobileZone").collection("mobile");
+  const checkoutMobileCollection = client.db("bismillahMobileZone").collection("checkoutMobile");
   
-    app.post('https://bismillah-phone-farhan.herokuapp.com/adminAddMobile', (req,res)=>{
+    app.post('/adminAddMobile', (req,res)=>{
       const newMobile = req.body;
      // console.log('Adding mobile', newMobile);
       mobileCollection.insertOne(newMobile)
       .then(result =>{
-        console.log('insertedCount',result.insertedCount);
+      //  console.log('insertedCount',result.insertedCount);
         res.send(result.insertedCount > 0)
       })
     })
+
+    app.post('/orderCheckout', (req, res)=>{
+      const newOrder = req.body;
+      checkoutMobileCollection.insertOne(newOrder)
+      .then(result=>{
+        res.send(result.insertedCount > 0)
+      })
+      //console.log(newOrder);
+    })
     
-    app.get('https://bismillah-phone-farhan.herokuapp.com/mobileItems', (req, res)=>{
+    app.get('/mobileItems', (req, res)=>{
       mobileCollection.find()
       .toArray((err, mobileItems)=>{
         res.send( mobileItems);
       })
 
     })
-       app.get('https://bismillah-phone-farhan.herokuapp.com/mobile/:id', (req, res)=>{
+    
+       app.get('/mobile/:id', (req, res)=>{
          const mobile = req.params.id
-        console.log('mobile', mobile);
+       // console.log('mobile', mobile);
         mobileCollection.find({_id:ObjectID(req.params.id)})
           .toArray((err, mobileItems)=>{
          res.send( mobileItems[0]);
           })
          })
+       
+         app.get('/orders', (req, res)=>{
+           checkoutMobileCollection.find({email: req.query.email})
+           .toArray((err, totalOrder)=>{
+             res.send( totalOrder)
+           })
+         })
+         app.delete('/delete/:id', (req, res)=>{
+          console.log(req.params.id);
+          mobileCollection.deleteOne({_id: ObjectId(req.params.id)})
+          .then( result =>{
+            console.log(result);
+          })
+        })
 });
 
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
