@@ -63,6 +63,14 @@ client.connect(err => {
             res.send(result.deletedCount > 0)
           })
         })
+
+         app.delete('/cancelOrder/:id', (req, res)=>{
+          console.log(req.params.id);
+          checkoutMobileCollection.deleteOne({_id: ObjectId(req.params.id)})
+          .then( result =>{
+            res.send(result.deletedCount > 0)
+          })
+        })
 });
 
 
