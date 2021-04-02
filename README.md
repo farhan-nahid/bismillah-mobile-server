@@ -8,6 +8,7 @@
 - User and Admin can sign up and log in to this website using google facebook & email.
 - Admin can add more mobile
 - Admin can delete mobile
+- Responsive
 
 ### Front-end Technology:
 
