@@ -37,4 +37,4 @@
 
 
 
-You can see client side code in [Bismillah-Mobile-Zone-client](https://github.com/Porgramming-Hero-web-course/full-stack-client-farhan-nahid)
+You can see client side code in [Bismillah-Mobile-Zone-client](https://github.com/farhan-nahid/bismillah-mobile-zone-client)
